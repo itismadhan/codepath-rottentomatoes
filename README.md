@@ -17,7 +17,10 @@ Stories Completed:-
 * [x] Optional: Customize the navigation bar.
 * [x] Optional: Add a search bar.
 
-Other Libraries
+Other Libraries Used:
+* [AFNetworking](https://github.com/AFNetworking/AFNetworking)
+* [MBProgressHUD] (https://github.com/jdg/MBProgressHUD)
+* [MBLMessageBanner] (https://github.com/Loadex/MessageBanner)
 
 The app leverages the [Box Office Movies API](http://developer.rottentomatoes.com/docs/read/json/v10/Box_Office_Movies) which returns the following JSON response:
 
