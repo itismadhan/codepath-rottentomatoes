@@ -138,6 +138,10 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
         return true
     }
     
+    func searchBarCancelButtonClicked(searchBar: UISearchBar) {
+        getMoviesAndLoadTableView()
+    }
+    
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
         if (segue.identifier == "movieDetailsSegue") {
             let movieDetailsVC:MovieDetailsController = segue.destinationViewController as MovieDetailsController
