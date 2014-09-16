@@ -45,7 +45,9 @@ class MovieDetailsController: UIViewController {
         
         self.movieImageView.setImageWithURLRequest(NSURLRequest(URL: NSURL(string:postersOriginal)), placeholderImage: placeHolderImage,
             success: {(request:NSURLRequest!,response:NSHTTPURLResponse!, image:UIImage!) -> Void in
-                self.movieImageView.setImageWithURL(NSURL(string: postersOriginal))
+                UIView.transitionWithView(self.movieImageView, duration: 0.3, options: UIViewAnimationOptions.TransitionCrossDissolve,animations: {
+                    self.movieImageView.setImageWithURL(NSURL(string: postersOriginal))
+                }, completion: nil)
             }, failure: {
                 (request:NSURLRequest!,response:NSHTTPURLResponse!, error:NSError!) -> Void in
         })

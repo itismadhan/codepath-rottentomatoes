@@ -82,9 +82,28 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
         cell.synopsisTitleLabel.text = movie["synopsis"] as? String
         cell.movieID = movie["id"] as? Int
         
-        
-        cell.movieImageView.setImageWithURL(NSURL(string: posterUrl))
+        setImageForCellImageView(cell, indexPath: indexPath)
         return cell
+    }
+    
+    func setImageForCellImageView(cell:MovieCell, indexPath:NSIndexPath) -> Void {
+        var movie = movies[indexPath.row]
+        var posters = movie["posters"] as NSDictionary
+        var posterUrl = posters["thumbnail"] as String
+        let profileImageURL = posterUrl.stringByReplacingOccurrencesOfString("tmb", withString: "pro", options: NSStringCompareOptions.LiteralSearch, range:nil)
+        let placeHolderImageUrl = NSURL.URLWithString(posterUrl);
+        var err: NSError?
+        let placeHolderImageData:NSData = NSData.dataWithContentsOfURL(placeHolderImageUrl,options: NSDataReadingOptions.DataReadingMappedIfSafe, error: &err)
+        let placeHolderImage:UIImage = UIImage(data: placeHolderImageData)
+        cell.movieImageView.setImageWithURLRequest(NSURLRequest(URL: NSURL(string:profileImageURL)), placeholderImage: placeHolderImage,
+            success: {(request:NSURLRequest!,response:NSHTTPURLResponse!, image:UIImage!) -> Void in
+                UIView.transitionWithView(cell.movieImageView, duration: 0.3, options: UIViewAnimationOptions.TransitionCrossDissolve,animations: {
+                    cell.movieImageView.setImageWithURL(NSURL(string: profileImageURL))
+                    }, completion: nil)
+            }, failure: {
+                (request:NSURLRequest!,response:NSHTTPURLResponse!, error:NSError!) -> Void in
+        })
+        
     }
     
     func tableView(tableView: UITableView, didselectRowAtIndexPath indexPath: NSIndexPath) {
