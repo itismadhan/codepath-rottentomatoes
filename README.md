@@ -68,6 +68,8 @@ The app leverages the [Box Office Movies API](http://developer.rottentomatoes.co
 }
 ```
 
+
+* Video Walkthrough
 <a href="http://imgur.com/ov5RK0y"><img src="http://i.imgur.com/ov5RK0y.gif" title="Hosted by imgur.com" /></a>
 
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
