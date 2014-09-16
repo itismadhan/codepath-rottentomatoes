@@ -66,6 +66,7 @@ The app leverages the [Box Office Movies API](http://developer.rottentomatoes.co
      ...
   }]
 }
+```
 
 http://imgur.com/ov5RK0y
 
