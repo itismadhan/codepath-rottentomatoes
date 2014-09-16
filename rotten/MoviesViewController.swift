@@ -8,18 +8,19 @@
 
 import UIKit
 
-class MoviesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class MoviesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate, UISearchDisplayDelegate {
     
     @IBOutlet weak var movieTableView: UITableView!
     var movies: [NSDictionary] = []
+    var filteredMovies: [NSDictionary] = []
     var refreshControl:UIRefreshControl!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.refreshControl = UIRefreshControl()
-        self.refreshControl.attributedTitle = NSAttributedString(string: "Pull to refersh")
+        self.refreshControl.backgroundColor = UIColor.blackColor()
         self.refreshControl.addTarget(self, action: "refresh:", forControlEvents: UIControlEvents.ValueChanged)
         self.movieTableView.addSubview(refreshControl)
-        
         
         movieTableView.delegate = self
         movieTableView.dataSource = self
@@ -68,12 +69,22 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.movies.count
+        if self.searchDisplayController!.active {
+            self.searchDisplayController?.searchResultsTableView.rowHeight = self.movieTableView.rowHeight
+            return self.filteredMovies.count
+        } else {
+            return self.movies.count
+        }
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         var cell = movieTableView.dequeueReusableCellWithIdentifier("MovieCell") as MovieCell
-        var movie = movies[indexPath.row]
+        var movie = NSDictionary()
+        if self.searchDisplayController!.active {
+            movie = filteredMovies[indexPath.row]
+        } else {
+            movie = movies[indexPath.row]
+        }
         var posters = movie["posters"] as NSDictionary
         var posterUrl = posters["thumbnail"] as String
         
@@ -110,14 +121,41 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
         self.performSegueWithIdentifier("movieDetailsSegue", sender: self)
     }
     
+    
+    func filterContentForSearchText (searchText: String) {
+        filteredMovies = movies.filter{
+            ($0["title"] as NSString).localizedCaseInsensitiveContainsString("\(searchText)")
+        }
+    }
+    
+    func searchDisplayController(controller: UISearchDisplayController!, shouldReloadTableForSearchString searchString: String!) -> Bool {
+        self.filterContentForSearchText(searchString)
+        controller.searchResultsTableView.backgroundColor = UIColor.blackColor()
+        return true
+    }
+    
+    func searchDisplayController(controller: UISearchDisplayController!, shouldReloadTableForSearchScope searchOption: Int) -> Bool {
+        self.filterContentForSearchText(self.searchDisplayController!.searchBar.text)
+        return true
+    }
+    
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
         if (segue.identifier == "movieDetailsSegue") {
-            var indexPath:NSIndexPath = self.movieTableView.indexPathForSelectedRow()!
-            var movie = movies[indexPath.row] as NSDictionary
             let movieDetailsVC:MovieDetailsController = segue.destinationViewController as MovieDetailsController
+            var indexPath:NSIndexPath
             
-            movieDetailsVC.movie = movie
-            self.movieTableView.deselectRowAtIndexPath(indexPath, animated: true)
+            if self.searchDisplayController!.active {
+                indexPath = self.searchDisplayController!.searchResultsTableView.indexPathForSelectedRow()!
+                let movie = self.filteredMovies[indexPath.row] as NSDictionary
+                movieDetailsVC.movie = movie
+                self.searchDisplayController!.searchResultsTableView.deselectRowAtIndexPath(indexPath, animated: true)
+            } else {
+                indexPath = self.movieTableView.indexPathForSelectedRow()!
+                var movie = movies[indexPath.row] as NSDictionary
+                movieDetailsVC.movie = movie
+                self.movieTableView.deselectRowAtIndexPath(indexPath, animated: true)
+            }
+            
         }
     }
     

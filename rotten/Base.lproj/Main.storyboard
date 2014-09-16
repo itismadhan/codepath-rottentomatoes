@@ -16,6 +16,15 @@
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="sectionIndexBackgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                <searchBar key="tableHeaderView" contentMode="redraw" barStyle="black" searchBarStyle="prominent" placeholder="Search Movies" id="5Li-JO-LC0">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                    <textInputTraits key="textInputTraits" keyboardAppearance="alert"/>
+                                    <connections>
+                                        <outlet property="delegate" destination="vXZ-lx-hvc" id="oIh-eI-yPx"/>
+                                    </connections>
+                                </searchBar>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" restorationIdentifier="MovieCell" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="MovieCell" rowHeight="114" id="MpR-DY-JrB" userLabel="Movie Table View Cell" customClass="MovieCell" customModule="rotten" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -54,14 +63,24 @@
                                 </prototypes>
                             </tableView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" title="Movies" id="dwy-ay-HZD"/>
                     <connections>
                         <outlet property="movieTableView" destination="2Zg-Bn-lRt" id="STc-Ce-X64"/>
+                        <outlet property="searchDisplayController" destination="suG-u6-Yws" id="E12-AL-mCe"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
+                <searchDisplayController id="suG-u6-Yws">
+                    <connections>
+                        <outlet property="delegate" destination="vXZ-lx-hvc" id="5bt-Ww-gyY"/>
+                        <outlet property="searchBar" destination="5Li-JO-LC0" id="SgM-zl-mKV"/>
+                        <outlet property="searchContentsController" destination="vXZ-lx-hvc" id="m78-Ix-5FR"/>
+                        <outlet property="searchResultsDataSource" destination="vXZ-lx-hvc" id="0h4-qX-o0U"/>
+                        <outlet property="searchResultsDelegate" destination="vXZ-lx-hvc" id="BYt-cc-1LH"/>
+                    </connections>
+                </searchDisplayController>
             </objects>
             <point key="canvasLocation" x="776" y="363"/>
         </scene>
