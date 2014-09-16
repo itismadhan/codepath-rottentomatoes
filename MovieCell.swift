@@ -13,9 +13,14 @@ class MovieCell: UITableViewCell {
     @IBOutlet weak var movieImageView: UIImageView!
     @IBOutlet weak var movieTitleLabel: UILabel!
     @IBOutlet weak var synopsisTitleLabel: UILabel!
+    var movieID:Int!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        self.backgroundColor = UIColor.blackColor()
+        movieTitleLabel.textColor = UIColor.whiteColor()
+        movieTitleLabel.font = UIFont.boldSystemFontOfSize(12)
+        synopsisTitleLabel.textColor = UIColor.whiteColor()
     }
 
     override func setSelected(selected: Bool, animated: Bool) {
