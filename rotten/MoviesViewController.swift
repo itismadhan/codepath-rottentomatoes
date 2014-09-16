@@ -56,7 +56,7 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
         NSURLConnection.sendAsynchronousRequest(request, queue: NSOperationQueue.mainQueue(), completionHandler:{(response:NSURLResponse!, responseData:NSData!, error: NSError!) ->Void in
             if error != nil
             {
-                println(error.description)
+                MBLMessageBanner.showMessageBannerInViewController(self, title: "Networking error", subtitle: nil, type: MBLMessageBannerType.Error,  atPosition: MBLMessageBannerPosition.Top)
             }
             else
             {

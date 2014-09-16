@@ -41,6 +41,23 @@ install_resource()
       ;;
   esac
 }
+install_resource "MessageBanner/MessageBanner/Ressources/Configuration Files/MessageBannerDesign.json"
+install_resource "MessageBanner/MessageBanner/Ressources/Images/ErrorBackgroundDefaultImage.png"
+install_resource "MessageBanner/MessageBanner/Ressources/Images/ErrorBackgroundDefaultImage@2x.png"
+install_resource "MessageBanner/MessageBanner/Ressources/Images/ErrorDefaultLeftImage.png"
+install_resource "MessageBanner/MessageBanner/Ressources/Images/ErrorDefaultLeftImage@2x.png"
+install_resource "MessageBanner/MessageBanner/Ressources/Images/MessageBackgroundDefaultImage.png"
+install_resource "MessageBanner/MessageBanner/Ressources/Images/MessageBackgroundDefaultImage@2x.png"
+install_resource "MessageBanner/MessageBanner/Ressources/Images/MessageDefaultLeftImage.png"
+install_resource "MessageBanner/MessageBanner/Ressources/Images/MessageDefaultLeftImage@2x.png"
+install_resource "MessageBanner/MessageBanner/Ressources/Images/SuccessBackgroundDefaultImage.png"
+install_resource "MessageBanner/MessageBanner/Ressources/Images/SuccessBackgroundDefaultImage@2x.png"
+install_resource "MessageBanner/MessageBanner/Ressources/Images/SuccessDefaultLeftImage.png"
+install_resource "MessageBanner/MessageBanner/Ressources/Images/SuccessDefaultLeftImage@2x.png"
+install_resource "MessageBanner/MessageBanner/Ressources/Images/WarningBackgroundDefaultImage.png"
+install_resource "MessageBanner/MessageBanner/Ressources/Images/WarningBackgroundDefaultImage@2x.png"
+install_resource "MessageBanner/MessageBanner/Ressources/Images/WarningDefaultLeftImage.png"
+install_resource "MessageBanner/MessageBanner/Ressources/Images/WarningDefaultLeftImage@2x.png"
 
 rsync -avr --copy-links --no-relative --exclude '*/.svn/*' --files-from="$RESOURCES_TO_COPY" / "${CONFIGURATION_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}"
 if [[ "${ACTION}" == "install" ]]; then

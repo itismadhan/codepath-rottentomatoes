@@ -20,14 +20,23 @@ PODS:
   - AFNetworking/UIKit (2.4.1):
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
+  - FXBlurView (1.6.2)
+  - HexColors (2.2.1)
   - MBProgressHUD (0.9)
+  - MessageBanner (1.0.1):
+    - FXBlurView (~> 1.6.1)
+    - HexColors (~> 2)
 
 DEPENDENCIES:
   - AFNetworking
   - MBProgressHUD (~> 0.8)
+  - MessageBanner (~> 1.0)
 
 SPEC CHECKSUMS:
   AFNetworking: 0aabc6fae66d6e5d039eeb21c315843c7aae51ab
+  FXBlurView: 47496afc9160097fa34af35fc4b310bd85d65dca
+  HexColors: 01384d2bbe8dc4ffa43c3b4135db6e976952d153
   MBProgressHUD: 2038dbcf3dce73215abed6001657043d53aa79a8
+  MessageBanner: 11b2caabab07e283df1d612e1c6c9c8a9214ff9f
 
 COCOAPODS: 0.33.1
