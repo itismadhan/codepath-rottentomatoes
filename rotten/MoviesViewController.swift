@@ -92,13 +92,17 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
         cell.movieTitleLabel.text = movie["title"] as? String
         cell.synopsisTitleLabel.text = movie["synopsis"] as? String
         cell.movieID = movie["id"] as? Int
-        
         setImageForCellImageView(cell, indexPath: indexPath)
         return cell
     }
     
     func setImageForCellImageView(cell:MovieCell, indexPath:NSIndexPath) -> Void {
-        var movie = movies[indexPath.row]
+        var movie = NSDictionary()
+        if self.searchDisplayController!.active {
+            movie = filteredMovies[indexPath.row]
+        } else {
+            movie = movies[indexPath.row]
+        }
         var posters = movie["posters"] as NSDictionary
         var posterUrl = posters["thumbnail"] as String
         let profileImageURL = posterUrl.stringByReplacingOccurrencesOfString("tmb", withString: "pro", options: NSStringCompareOptions.LiteralSearch, range:nil)
@@ -131,11 +135,6 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
     func searchDisplayController(controller: UISearchDisplayController!, shouldReloadTableForSearchString searchString: String!) -> Bool {
         self.filterContentForSearchText(searchString)
         controller.searchResultsTableView.backgroundColor = UIColor.blackColor()
-        return true
-    }
-    
-    func searchDisplayController(controller: UISearchDisplayController!, shouldReloadTableForSearchScope searchOption: Int) -> Bool {
-        self.filterContentForSearchText(self.searchDisplayController!.searchBar.text)
         return true
     }
     

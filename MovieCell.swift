@@ -31,5 +31,10 @@ class MovieCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
+    
+    override var layoutMargins: UIEdgeInsets {
+        get { return UIEdgeInsetsZero }
+        set(newVal) {}
+    }
 
 }
