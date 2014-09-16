@@ -68,6 +68,6 @@ The app leverages the [Box Office Movies API](http://developer.rottentomatoes.co
 }
 ```
 
-http://imgur.com/ov5RK0y
+![alt tag](http://imgur.com/ov5RK0y)
 
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
